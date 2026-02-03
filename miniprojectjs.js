@@ -44,6 +44,10 @@ if (islogin == true) {
     menu += "4.Tìm mã số sách may mắn\n"
     menu += "5.Thoát chương trình\n"
     choose = Number(prompt(menu))
+         if (isNaN(choice)) {
+      alert("Vui lòng nhập số!");
+      continue;
+    }
     switch (choose) {
     case 1:
         do {
@@ -75,48 +79,54 @@ if (islogin == true) {
         }
         break;
     case 3:
-    quantity = Number(prompt("Số sách:"));
-   cost = Number(prompt("Phí 1 cuốn:"));
-   years = Number(prompt("Số năm:"));
+        let quantity = +prompt("số lượng sách hiện tại:"));
+        let cost = +prompt("phí bảo trì gốc cho 1 cuốn:"));
+        let years = +prompt("số năm dự toán:"));
 
-  if (isNaN(quantity) || isNaN(cost) || isNaN(years)) {
-    alert("Nhập sai dữ liệu!");
-    return;
-  }
+        if (
+          isNaN(quantity) ||
+          isNaN(cost) ||
+          isNaN(years) ||
+          quantity <= 0 ||
+          cost <= 0 ||
+          years <= 0
+        ) {
+          alert("Dữ liệu không hợp lệ!");
+        } else {
+          document.writeln("BẢNG DỰ TOÁN PHÍ BẢO TRÌ" + "<br>");
 
-  let year = 1;
-  while (year <= years) {
-    let total = quantity * cost;
-    console.log(`Năm ${year}: ${total.toLocaleString()} VNĐ`);
-    cost *= 1.1;
-    year++;
-  }
+          for (let i = 1; i <= years; i++) {
+            let totalCost = quantity * cost;
+            document.writeln("Năm " + i + ": " + totalCost + " VNĐ" + "<br>");
+            cost = cost * 1.1;
+          }
+        }
+        break;
 break;
    case 4:
-     let n = Number(prompt("Nhập N:"));
-  if (n <= 0 || isNaN(n)) {
-    alert("N không hợp lệ!");
-    return;
-  }
+     let n = Number(prompt("Nhập số giới hạn N:"));
 
-  let i = 1;
-  let count = 0;
-  let list = "";
+        if (isNaN(n) || n <= 0) {
+          alert("Dữ liệu không hợp lệ!");
+        } else {
+          let count = 0;
 
-  do {
-    if (i % 3 === 0 && i % 5 !== 0) {
-      list += i + " ";
-      count++;
-    }
-    i++;
-  } while (i <= n);
+          document.writeln("DANH SÁCH MÃ SỐ SÁCH MAY MẮN: " + "<br>");
+          for (let i = 1; i <= n; i++) {
+            if (i % 3 === 0 && i % 5 !== 0) {
+              document.writeln(i);
+              count++;
+            }
+          }
 
-  console.log(list || "Không có mã phù hợp");
-  console.log(`Tổng: ${count}`);
+          document.writeln("<br>" + "Tổng số mã may mắn: " + count + "<br>");
+        }
+        break;
 break;
     default:
         console.log("vui lòng nhập từ 1-5");
         break;
 }
     } while (choose !=5);
+
 }
